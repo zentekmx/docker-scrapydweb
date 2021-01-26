@@ -55,14 +55,14 @@ version: '3'
 services:
 
   scrapyd:
-    image: zentekmx/scrapyd:1.2.1
+    image: zentekmx/scrapyd
     ports:
-    - "6800:6800"
+    - 6800:6800
 
   scrapydweb:
     image: zentekmx/scrapydweb
     ports:
-      - 5000:5000
+    - 5000:5000
     environment:
     - SCRAPYD_SERVERS=scrapyd:6800
 
