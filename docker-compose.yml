@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  scrapyd:
+    image: zentekmx/scrapyd:1.2.1
+    ports:
+    - "6800:6800"
+    volumes:
+    - ${SCRAPYD_VOLUME:-scrapyd-volume}:/scrapyd:Z
+
+  scrapydweb:
+    image: zentekmx/scrapydweb:1.4.0
+    depends_on:
+    - scrapyd
+    links:
+    - scrapyd
+    ports:
+    - "5000:5000"
+    environment:
+    - SCRAPYD_ADMIN
+    - SCRAPYD_PASSWD
+    - SCRAPYD_SERVERS
+    - DATABASE_URL
+
+volumes:
+  scrapyd-volume:
+
